@@ -261,6 +261,20 @@ namespace Xamarin.Forms.Controls.XamStore
 			}, 0, 17);
 			grid.Children.Add(headerWidth, 1, 17);
 
+			Entry flyheaderMargin = new Entry();
+			flyheaderMargin.TextChanged += (_, __) =>
+			{
+				int topMargin;
+				if (Int32.TryParse(flyheaderMargin.Text, out topMargin))
+					(Shell.Current.FlyoutHeader as View).Margin = new Thickness(0, topMargin, 0, 0);
+				else
+					(Shell.Current.FlyoutHeader as View).ClearValue(View.MarginProperty);
+			};
+
+
+			grid.Children.Add(new Label() { Text = "FH Top Margin" }, 0, 18);
+			grid.Children.Add(flyheaderMargin, 1, 18);
+
 			Content = new ScrollView { Content = grid };
 
 			//var listView = new ListView();
